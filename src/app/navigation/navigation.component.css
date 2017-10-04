@@ -1,0 +1,25 @@
+.modal-body{
+    padding: 15px 80px;
+    padding-bottom: 60px;
+}
+.modal-body h1{
+    margin-top: 0;
+    text-align: center;
+}
+form{
+    margin-top: 30px;
+}
+.form-group input{
+    color: inherit;
+}
+form .btn{
+    background-color: #337ab7;
+    border-color: #2e6da4;
+}
+.modal-header{
+    padding-bottom: 0;
+    border-bottom: none;
+}
+.dropdown-menu ul li a{
+    cursor: pointer;
+}

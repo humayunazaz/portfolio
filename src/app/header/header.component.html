@@ -1,0 +1,38 @@
+<header id="header">
+    <div class="editButton" *ngIf="user">
+        <button class="btn btn-warning" data-toggle="modal" data-target="#headerModal" >Edit</button>
+    </div>
+    <div class="center text-center content-here">
+        <h1 class="bigheadline">{{content.name}}</h1>
+        <h4 class="subheadline">{{content.title}}</h4>
+    </div>
+    <div class="bottom">
+        <a class="scrollDown animated pulse" id="scrollToContent" (click)="goto()"><i class="pe-7s-angle-down-circle pe-va"></i></a>
+    </div>
+</header>
+
+<div id="headerModal" class="modal fade editModal" role="dialog">
+    <div class="modal-dialog">
+    
+        <!-- Modal content-->
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal">&times;</button>
+            </div>
+            <div class="modal-body">
+                <form #f="ngForm" (ngSubmit)="save(f.value)">
+                    <div class="form-group">
+                        <label for="name">Name</label>
+                        <input #name="ngModel" [(ngModel)]="content.name" name="name" id="name" type="text" class="form-control" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="title">Title</label>
+                        <input #title="ngModel" [(ngModel)]="content.title" name="title" id="title" type="title" class="form-control" required>
+                    </div>
+                    <button class="btn btn-primary">Submit</button>
+                </form>
+            </div>
+        </div>
+    
+    </div>
+</div>

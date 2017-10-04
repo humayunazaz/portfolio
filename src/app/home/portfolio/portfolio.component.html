@@ -1,0 +1,100 @@
+<section id="portfolio" class="portfolio-area">
+  <div class="container">
+      <h2 class="block_title">My Works</h2>
+      <div class="createButton">
+          <button class="btn btn-primary" data-toggle="modal" data-target="#portfolioModal" (click)="create = true" *ngIf="user">Create</button>
+      </div>
+      <div class="row port cs-style-3" *ngIf="displayed">
+          <div class="col-md-4 col-sm-6 col-xs-12 item-space" *ngFor="let portfolio of portfolios; let i = index;">
+              <figure @bounceLeft *ngIf="i < show && ((i + 1) % 2) != 0">
+                  <img src="{{portfolio.imageUrl}}" alt="img04">
+                  <figcaption>
+                      <h3>{{portfolio.name}}</h3>
+                      <span>{{portfolio.title}}</span>
+                      <a class="button" (click)="display(portfolio)" data-toggle="modal" data-target="#portfolioModal">Take a look</a>
+                  </figcaption>
+                  <div class="hoverEdit" *ngIf="user">
+                      <i class="fa fa-edit" (click)="edited(portfolio)" data-toggle="modal" data-target="#portfolioModal"></i>
+                  </div>
+              </figure>
+              <figure @bounceRight *ngIf="i < show && ((i + 1) % 2) == 0">
+                  <img src="{{portfolio.imageUrl}}" alt="img04">
+                  <figcaption>
+                      <h3>{{portfolio.name}}</h3>
+                      <span>{{portfolio.title}}</span>
+                      <a class="button" (click)="display(portfolio)" data-toggle="modal" data-target="#portfolioModal">Take a look</a>
+                  </figcaption>
+                  <div class="hoverEdit" *ngIf="user">
+                      <i class="fa fa-edit" (click)="edited(portfolio)" data-toggle="modal" data-target="#portfolioModal"></i>
+                  </div>
+              </figure>
+          </div>
+          <div class="col-xs-12" *ngIf="show < portfolios.length">
+              <div class="btn-center"><a (click)="show = (show * 2)" class="big button">View all</a></div>
+          </div>
+      </div>
+  </div><!-- container -->
+</section><!-- portfolio -->
+<div id="portfolioModal" class="modal fade editModal" role="dialog">
+    <div class="modal-dialog" [class.dis]="!edit && !create">
+    
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal">&times;</button>
+            </div>
+            <div class="modal-body" *ngIf="!edit && !create">
+                <div class="mainImage col-sm-7">
+                    <img src="{{single.imageUrl}}" alt="">
+                </div>
+                <div class="content col-sm-5">
+                    <h3>{{single.name}}</h3>
+                    <p>{{single.title}}</p>
+                    <p>{{single.content}}</p>
+                </div>
+            </div>
+            <div class="modal-body" *ngIf="edit && !create">
+                <form #f="ngForm" (ngSubmit)="saveEdit(f.value, single.$key)">
+                    <div class="form-group">
+                        <label for="name">Name</label>
+                        <input #name="ngModel" [(ngModel)]="single.name" name="name" id="name" type="text" class="form-control">
+                    </div>
+                    <div class="form-group">
+                        <label for="title">Title</label>
+                        <input #title="ngModel" [(ngModel)]="single.title" name="title" id="title" type="text" class="form-control">
+                    </div>
+                    <div class="form-group">
+                        <label for="imageUrl">ImageUrl</label>
+                        <input #imageUrl="ngModel" [(ngModel)]="single.imageUrl" name="imageUrl" id="imageUrl" type="text" class="form-control">
+                    </div>
+                    <div class="form-group">
+                        <label for="content">Content</label>
+                        <textarea #content="ngModel" [(ngModel)]="single.content" name="content" id="content" type="text" class="form-control" rows="5" maxlength="450"></textarea>
+                    </div>
+                    <button class="btn btn-primary">Submit</button>
+                </form>
+            </div>
+            <div class="modal-body" *ngIf="create">
+                <form #f="ngForm" (ngSubmit)="createWork(f.value, single.$key)">
+                    <div class="form-group">
+                        <label for="name">Name</label>
+                        <input #name="ngModel" ngModel name="name" id="name" type="text" class="form-control" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="title">Title</label>
+                        <input #title="ngModel" ngModel name="title" id="title" type="text" class="form-control" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="imageUrl">ImageUrl</label>
+                        <input #imageUrl="ngModel" ngModel name="imageUrl" id="imageUrl" type="text" class="form-control" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="content">Content</label>
+                        <textarea #content="ngModel" ngModel name="content" id="content" type="text" class="form-control" rows="5" maxlength="450" required></textarea>
+                    </div>
+                    <button class="btn btn-primary" [disabled]="!f.valid">Submit</button>
+                </form>
+            </div>
+        </div>
+    
+    </div>
+</div>

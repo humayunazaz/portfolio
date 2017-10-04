@@ -1,0 +1,80 @@
+<section id="testimonial" class="testimonial-area">
+  <div class="container">
+      <h2 class="block_title">Testimonials</h2>
+      <div class="row">
+          <div class="col-xs-12">
+          </div>
+          <div class="editButton" *ngIf="user">
+              <button class="btn btn-primary" data-toggle="modal" data-target="#testimonialModal" (click)="created()">Create</button>
+          </div>
+          <div id="myCarousel" class="carousel slide col-xs-12" data-ride="carousel">
+            <div class="carousel-inner">
+                <div class="item" [class.active]="i == 0" *ngFor="let testimonial of testimonials; let i = index">
+                    <div class="testimonila-block">
+                        <img src="{{testimonial.imageUrl}}" alt="clients" class="selfshot">
+                        <p>{{testimonial.review}}</p>
+                        <strong>{{testimonial.name}}</strong>
+                        <br>
+                        <small>{{testimonial.title}}</small>
+                        <div class="hoverEffect" *ngIf="user">
+                            <i class="fa fa-edit" data-toggle="modal" data-target="#testimonialModal" (click)="edited(testimonial)"></i>
+                        </div>
+                    </div>
+                </div>
+            </div>
+          </div>
+      </div>
+  </div><!-- container -->
+</section><!-- testimonial -->
+<div id="testimonialModal" class="modal fade editModal" role="dialog">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal">&times;</button>
+            </div>
+            <div class="modal-body" *ngIf="edit">
+                <form #f="ngForm" (ngSubmit)="saveEdit(f.value, single.$key)">
+                    <div class="form-group">
+                        <label for="name">Name</label>
+                        <input #name="ngModel" [(ngModel)]="single.name" name="name" id="name" type="text" class="form-control">
+                    </div>
+                    <div class="form-group">
+                        <label for="title">Title</label>
+                        <input #title="ngModel" [(ngModel)]="single.title" name="title" id="title" type="text" class="form-control">
+                    </div>
+                    <div class="form-group">
+                        <label for="imageUrl">ImageUrl</label>
+                        <input #imageUrl="ngModel" [(ngModel)]="single.imageUrl" name="imageUrl" id="imageUrl" type="text" class="form-control">
+                    </div>
+                    <div class="form-group">
+                        <label for="review">Review</label>
+                        <textarea #review="ngModel" [(ngModel)]="single.review" name="review" id="content" type="text" class="form-control" rows="5" maxlength="450"></textarea>
+                    </div>
+                    <button class="btn btn-primary">Submit</button>
+                </form>
+            </div>
+            <div class="modal-body" *ngIf="create">
+                <form #f="ngForm" (ngSubmit)="createTest(f.value, single.$key)">
+                    <div class="form-group">
+                        <label for="name">Name</label>
+                        <input #name="ngModel" ngModel name="name" id="name" type="text" class="form-control" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="title">Title</label>
+                        <input #title="ngModel" ngModel name="title" id="title" type="text" class="form-control" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="imageUrl">ImageUrl</label>
+                        <input #imageUrl="ngModel" ngModel name="imageUrl" id="imageUrl" type="text" class="form-control" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="review">Review</label>
+                        <textarea #review="ngModel" ngModel name="review" id="review" type="text" class="form-control" rows="5" maxlength="450" required></textarea>
+                    </div>
+                    <button class="btn btn-primary" [disabled]="!f.valid">Submit</button>
+                </form>
+            </div>
+        </div>
+    
+    </div>
+</div>

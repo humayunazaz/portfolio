@@ -1,0 +1,91 @@
+<section id="contact" class="mapWrap">
+  <div id="contact-area">
+      <div class="container">
+          <h2 class="block_title">Hey !!!</h2>
+          <div class="row" *ngIf="display">
+              <div class="col-xs-12">
+              </div>
+              <div class="editButton" *ngIf="user"> 
+                  <button class="btn btn-primary" data-toggle="modal" data-target="#contactModal">Edit</button>
+              </div>
+              <div class="col-sm-6" @bounceLeft>
+                  <div class="moreDetails">
+                      <h2 class="con-title">More About me</h2>
+                      <p> {{detail.desc}}</p>
+                      <ul class="address">
+                          <li><i class="pe-7s-map-marker"></i><span>{{detail.addr}}</span></li>
+                          <li><i class="pe-7s-mail"></i><span>{{detail.email}}</span></li>
+                          <li><i class="pe-7s-phone"></i><span>{{detail.phone}}</span></li>
+                          <li><i class="pe-7s-global"></i><span><a href="#">{{detail.web}}</a></span></li>
+                      </ul>
+                  </div>
+              </div>
+              <div class="col-sm-6" @bounceRight>
+                  <h2 class="con-title">Drop a line</h2>
+                  <form #fo="ngForm" (ngSubmit)="saveMessage(fo)">
+                    <div class="form-group">
+                      <input type="text" #name="ngModel" ngModel class="form-control" id="user_name" name="name" placeholder="Enter your name" required>
+                    </div>
+                    <div class="form-group">
+                      <input type="email" #email="ngModel" ngModel class="form-control" id="your_email" name="email" placeholder="Enter your email" required>
+                    </div>
+                    <div class="form-group">
+                      <textarea name="InputMessage" #message="ngModel" ngModel id="user_message" class="form-control" name="message" rows="5" required></textarea>
+                    </div>
+
+                    <button type="submit" class="btn medium" [disabled]="!fo.valid">Let me know</button>
+                  </form>   
+              </div>
+          </div>
+      </div><!-- container -->
+  </div><!-- contact-area -->
+  <div id="social">
+      <div class="container">
+          <div class="row">
+              <div class="col-xs-12">
+                  <ul class="scoialinks">
+                      <li class="normal-txt">Find me on</li>
+                      <li class="social-icons"><a class="facebook" href="https://www.facebook.com/humayun.khan.77" target="blank"></a></li>
+                      <li class="social-icons"><a class="twitter" href="https://twitter.com/HumayunAzaz" target="blank"></a></li>
+                      <li class="social-icons"><a class="linkedin" href="https://www.linkedin.com/in/humayun-khan-7719a8106/" target="blank"></a></li>
+                  </ul>
+              </div>
+          </div>
+      </div>
+  </div><!-- social -->
+</section><!-- contact -->
+<div id="contactModal" class="modal fade editModal" role="dialog">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal">&times;</button>
+            </div>
+            <div class="modal-body">
+                <form #f="ngForm" (ngSubmit)="saveEdit(f.value)">
+                    <div class="form-group">
+                        <label for="addr">Address</label>
+                        <input #addr="ngModel" [(ngModel)]="detail.addr" name="addr" id="addr" type="text" class="form-control">
+                    </div>
+                    <div class="form-group">
+                        <label for="email">Email</label>
+                        <input #email="ngModel" [(ngModel)]="detail.email" name="email" id="email" type="text" class="form-control">
+                    </div>
+                    <div class="form-group">
+                        <label for="phone">Phone</label>
+                        <input #phone="ngModel" [(ngModel)]="detail.phone" name="phone" id="phone" type="text" class="form-control">
+                    </div>
+                    <div class="form-group">
+                        <label for="web">Web</label>
+                        <input #web="ngModel" [(ngModel)]="detail.web" name="web" id="web" type="text" class="form-control">
+                    </div>
+                    <div class="form-group">
+                        <label for="desc">Description</label>
+                        <textarea #desc="ngModel" [(ngModel)]="detail.desc" name="desc" id="content" type="text" class="form-control" rows="5" maxlength="450"></textarea>
+                    </div>
+                    <button class="btn btn-primary">Submit</button>
+                </form>
+            </div>
+        </div>
+    
+    </div>
+</div>

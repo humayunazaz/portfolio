@@ -1,0 +1,52 @@
+<section id="navigation" [class.nav-wrap]="fixed">
+  <div class="container">
+      <div class="row">
+          <div class="col-xs-6">
+              <div class="logo"><a data-scroll href="#body" class="logo-text">{{userDetail.name}}</a></div>
+          </div>
+          <div class="col-xs-6">
+              <div class="nav">
+                  <a data-placement="bottom" title="Menu" class="menu" data-toggle="dropdown"><i class="pe-7s-menu"></i></a>
+                   <div class="dropdown-menu">
+                       <div class="arrow-up"></div>
+                       <ul>
+                           <li *ngFor="let menu of menus">
+                               <a (click)="slideTo(menu.title)">{{menu.title}} <i class="{{menu.icon}}"></i></a><span class="menu-effect"></span>
+                           </li>
+                           <li *ngIf="!user"><a data-toggle="modal" data-target="#login">Login <i class="fa fa-user"></i></a><span class="menu-effect"></span></li>
+                           <li *ngIf="user"><a (click)="logout()">Logout <i class="fa fa-sign-out"></i></a><span class="menu-effect"></span></li>
+                       </ul>
+                   </div>
+              </div>
+          </div>
+          <div id="login" class="modal fade" role="dialog">
+            <div class="modal-dialog">
+          
+              <!-- Modal content-->
+              <div class="modal-content">
+                <div class="modal-header">
+                  <button type="button" class="close" data-dismiss="modal">&times;</button>
+                </div>
+                <div class="modal-body">
+                    <h1>Login</h1>
+                  <form #f="ngForm" (ngSubmit)="login(f.value)">
+                    <div class="form-group">
+                        <label for="email">Email</label>
+                        <input #email="ngModel" ngModel name="email" id="email" type="text" class="form-control" required>
+                        <div class="alert alert-danger" *ngIf="email.touched && email.invalid">Email is required.</div>
+                    </div>
+                    <div class="form-group">
+                        <label for="password">Password</label>
+                        <input #password="ngModel" ngModel name="password" id="password" type="password" class="form-control" required>
+                        <div class="alert alert-danger" *ngIf="password.touched && password.invalid">Password is required.</div>
+                    </div>
+                    <button class="btn btn-primary" [disabled]="f.invalid">Submit</button>
+                  </form>
+                </div>
+              </div>
+          
+            </div>
+          </div>
+      </div>
+  </div>            
+</section>

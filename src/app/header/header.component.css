@@ -1,0 +1,16 @@
+#header{
+    height: 660px;
+}
+.content-here{
+    position: absolute;
+    width: 100%;
+    top: 30%;
+    left: 0;
+}
+.editButton{
+    padding: 20px;
+    text-align: right;
+}
+.scrollDown{
+    cursor: pointer;
+}
